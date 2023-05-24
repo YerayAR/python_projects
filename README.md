@@ -84,18 +84,14 @@ El código está escrito en Python y utiliza la biblioteca tkinter para la inter
 
 Este proyecto es una sencilla aplicación de Python que convierte el texto ingresado a emojis correspondientes. Este conversor de texto a emoji está actualmente en versión de prueba y solo acepta texto en inglés.
 
-## Uso
+**Uso**
 
 Para utilizar el conversor de texto a emoji, simplemente ejecuta el script `text_to_emoji.py`. Se abrirá una interfaz gráfica de usuario donde podrás introducir tu texto en el campo de entrada. Después de introducir tu texto, haz clic en el botón "Submit" para convertir el texto a emojis. El texto convertido se mostrará en el campo de resultados.
 
-## Nota
+**Nota**
 
 Este proyecto utiliza un archivo `emoji.json` que contiene un diccionario de emojis. Cada emoji en el diccionario tiene un nombre y un carácter correspondiente. El script de Python busca en este diccionario para encontrar el mejor emoji correspondiente para cada palabra del texto ingresado.
 
-## Contribución
+**Contribución**
 
 Las contribuciones son bienvenidas. Por favor, sientete libre de sugerir mejoras o añadir nuevas características.
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT. Por favor, consulta el archivo `LICENSE` para más detalles.
