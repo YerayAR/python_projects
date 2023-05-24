@@ -25,4 +25,4 @@ def extraer_audio(ruta_videos, ruta_musica):
             audio.write_audiofile(ruta_audio)
 
 # Usar la función
-extraer_audio('C:/Users/yera2/Videos', 'C:/Users/yera2/Music')
+extraer_audio('path1', 'path2')
