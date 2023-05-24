@@ -38,3 +38,30 @@ Instalación de las Dependencias
 Puedes instalar las dependencias ejecutando el siguiente comando en tu terminal:
 Copy code
 pip install tkinter pillow opencv-python moviepy
+
+Visualizador de Algoritmos de Ordenamiento
+Este proyecto es una visualización interactiva de varios algoritmos de ordenamiento. Permite a los usuarios seleccionar un algoritmo de ordenamiento y luego visualizar cómo el algoritmo ordena una lista de números en tiempo real.
+
+Código principal:
+
+El código está escrito en Python y hace uso de varias bibliotecas como matplotlib y tkinter para la interfaz de usuario y la visualización. Los algoritmos de ordenamiento incluyen: Selection Sort, QuickSort, y Merge Sort.
+
+Instrucciones de uso:
+
+Ejecute el script en Python.
+Seleccione el algoritmo de ordenamiento que desea visualizar utilizando los botones de opción.
+Presione el botón "Visualizar" para comenzar la visualización.
+
+Generador y Guardador de Contraseñas
+Este proyecto es un generador de contraseñas que permite a los usuarios generar contraseñas seguras y guardarlas junto con un nombre de usuario o descriptor.
+
+Código principal:
+
+El código está escrito en Python y utiliza la biblioteca tkinter para la interfaz de usuario. La aplicación genera contraseñas que incluyen letras, números y símbolos de puntuación, y guarda las contraseñas generadas en un archivo CSV junto con un nombre de usuario y la fecha y hora en que se creó la contraseña.
+
+Instrucciones de uso:
+
+Ejecute el script en Python.
+Para generar una nueva contraseña, haga clic en el botón "Generar Contraseña".
+Para guardar una contraseña, introduzca un nombre en el campo de entrada y haga clic en "Guardar Contraseña".
+Para ver las contraseñas guardadas, haga clic en "Contraseñas Guardadas".
