@@ -1,6 +1,6 @@
 # Proyectos
 
-Este repositorio contiene varios proyectos desarrollados en Python. A continuación se presentan breves descripciones de cada uno de los proyectos.
+Este repositorio contiene varios proyectos desarrollados en Python. Cada carpeta incluye un `README.md` con instrucciones y detalles del proyecto.
 
 ## Calculadora Futurista
 

@@ -1,7 +1,5 @@
 import tkinter as tk
-import cv2
 from PIL import Image, ImageTk
-import time
 import re
 
 # Función para reproducir un GIF en bucle
@@ -80,15 +78,25 @@ def borrar_todo():
     resultado_text.delete(1.0, tk.END)
     resultado_text.config(state='disabled')
 
-# Crear ventana
-ventana = tk.Tk()
-ventana.title("Calculadora Futurista")
-ventana.configure(bg='black')
-ventana.attributes('-alpha', 0.95)
+def main():
+    global ventana, entry, resultado_text
+
+    ventana = tk.Tk()
+    ventana.title("Calculadora Futurista")
+    ventana.configure(bg='black')
+    ventana.attributes('-alpha', 0.95)
 
 # Crear y colocar campo de entrada de texto
-entry = tk.Entry(ventana, width=40, font=("Helvetica", 20), borderwidth=5, bg='black', fg='green', insertbackground='green')
-entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+    entry = tk.Entry(
+        ventana,
+        width=40,
+        font=("Helvetica", 20),
+        borderwidth=5,
+        bg="black",
+        fg="green",
+        insertbackground="green",
+    )
+    entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
 def insert_with_clear_error(text):
      if resultado_text["state"] == "normal":
@@ -103,69 +111,84 @@ def button_pressed(button):
 def button_released(button):
     button.config(relief="ridge")
 
-# Crear y colocar botones
-botones = [
-    ("7", 1, 0, 1, 2), ("8", 1, 1, 1, 2), ("9", 1, 2, 1, 2), ("/", 1, 3, 1, 2),
-    ("4", 2, 0, 1, 2), ("5", 2, 1, 1, 2), ("6", 2, 2, 1, 2), ("*", 2, 3, 1, 2),
-    ("1", 3, 0, 1, 2), ("2", 3, 1, 1, 2), ("3", 3, 2, 1, 2), ("-", 3, 3, 1, 2),
-    ("0", 4, 0, 1, 2), (".", 4, 1, 1, 2), ("=", 4, 2, 1, 2), ("+", 4, 3, 1, 2),
-    ("Borrar", 5, 0, 1, 2), ("Borrar\nTodo", 5, 1, 1, 2),
-]
+    # Crear y colocar botones
+    botones = [
+        ("7", 1, 0, 1, 2), ("8", 1, 1, 1, 2), ("9", 1, 2, 1, 2), ("/", 1, 3, 1, 2),
+        ("4", 2, 0, 1, 2), ("5", 2, 1, 1, 2), ("6", 2, 2, 1, 2), ("*", 2, 3, 1, 2),
+        ("1", 3, 0, 1, 2), ("2", 3, 1, 1, 2), ("3", 3, 2, 1, 2), ("-", 3, 3, 1, 2),
+        ("0", 4, 0, 1, 2), (".", 4, 1, 1, 2), ("=", 4, 2, 1, 2), ("+", 4, 3, 1, 2),
+        ("Borrar", 5, 0, 1, 2), ("Borrar\nTodo", 5, 1, 1, 2),
+    ]
 
-# Iterar sobre la lista de botones y sus propiedades
-for (texto, fila, columna, borderwidth, width) in botones:
-    # Establecer el estilo de los botones
-    estilo_boton = {
-        "height": 2,  # Altura del botón en líneas de texto (2 líneas de texto de altura)
-    "width": width,  # Ancho del botón en caracteres (definido por la variable 'width' en la tupla)
-    "bd": 2,  # Ancho del borde en píxeles (2 píxeles)
-    "font": ("Helvetica", 14),  # Estilo y tamaño de fuente del texto del botón (Helvetica, tamaño 14)
-    "bg": "black",  # Color de fondo del botón (negro)
-    "fg": "green",  # Color del texto del botón (verde)
-    "activebackground": "darkgreen",  # Color de fondo cuando el botón está activo (cuando se presiona) (verde oscuro)
-    "activeforeground": "white",  # Color del texto cuando el botón está activo (blanco)
-    "borderwidth": borderwidth,  # Ancho del borde del botón en píxeles (definido por la variable 'borderwidth' en la tupla)
-    "relief": "ridge",  # Estilo del borde del botón (ridge: borde en relieve)
-    "highlightthickness": 0,  # Grosor del borde de resaltado del botón (0 píxeles, sin borde de resaltado)
-    "cursor": "hand2",  # Cambiar el cursor cuando se pasa por encima del botón (mano)
-    # Algunas propiedades adicionales que puedes considerar:
-    # "disabledforeground": "gray",  # Color del texto cuando el botón está deshabilitado (gris)
-    # "padx": 30,  # Espaciado horizontal adicional dentro del botón (30 píxeles)
-    # "pady": 10,  # Espaciado vertical adicional dentro del botón (10 píxeles)
-    }
+    # Iterar sobre la lista de botones y sus propiedades
+    for (texto, fila, columna, borderwidth, width) in botones:
+        # Establecer el estilo de los botones
+        estilo_boton = {
+            "height": 2,  # Altura del botón en líneas de texto
+            "width": width,  # Ancho del botón en caracteres
+            "bd": 2,  # Ancho del borde en píxeles
+            "font": ("Helvetica", 14),
+            "bg": "black",
+            "fg": "green",
+            "activebackground": "darkgreen",
+            "activeforeground": "white",
+            "borderwidth": borderwidth,
+            "relief": "ridge",
+            "highlightthickness": 0,
+            "cursor": "hand2",
+        }
 
     # Crear un botón con el estilo y el texto especificados
-    boton = tk.Button(ventana, text=texto, padx=30, pady=10, **estilo_boton)
+        boton = tk.Button(ventana, text=texto, padx=30, pady=10, **estilo_boton)
 
-    # Asignar la función correspondiente a cada botón según su texto
-    if texto == "=":
-        boton.config(command=calcular)
-    elif texto == "Borrar":
-        boton.config(command=borrar)
-    elif texto == "Borrar\nTodo":
-        boton.config(command=borrar_todo)
-    else:
-        boton.config(command=lambda t=texto: insert_with_clear_error(t))
+        # Asignar la función correspondiente a cada botón según su texto
+        if texto == "=":
+            boton.config(command=calcular)
+        elif texto == "Borrar":
+            boton.config(command=borrar)
+        elif texto == "Borrar\nTodo":
+            boton.config(command=borrar_todo)
+        else:
+            boton.config(command=lambda t=texto: insert_with_clear_error(t))
 
-    # Colocar el botón en la ventana usando grid
-    boton.grid(row=fila, column=columna, ipadx=5, ipady=5)
-    # Vincular eventos del mouse a las funciones para cambiar el aspecto de los botones al presionarlos
-    boton.bind("<ButtonPress-1>", lambda event, b=boton: button_pressed(b))
-    boton.bind("<ButtonRelease-1>", lambda event, b=boton: button_released(b))
+        # Colocar el botón en la ventana usando grid
+        boton.grid(row=fila, column=columna, ipadx=5, ipady=5)
+        # Vincular eventos del mouse a las funciones para cambiar el aspecto de los botones al presionarlos
+        boton.bind("<ButtonPress-1>", lambda event, b=boton: button_pressed(b))
+        boton.bind("<ButtonRelease-1>", lambda event, b=boton: button_released(b))
 
 # Agregar un label para mostrar el video
-gif_label = tk.Label(ventana, bg="black")
-gif_label.grid(row=0, column=0, rowspan=9, columnspan=4, sticky="nsew")
-gif_label.lower()
+    gif_label = tk.Label(ventana, bg="black")
+    gif_label.grid(row=0, column=0, rowspan=9, columnspan=4, sticky="nsew")
+    gif_label.lower()
 
 # Crear y colocar la caja de texto del resultado
-resultado_text = tk.Text(ventana, height=1, width=18, font=("Helvetica", 20), bd=5, state='disabled', bg='black', fg='green')
-resultado_text.grid(row=8, column=0, columnspan=4, padx=10, pady=(10, 0))
+    resultado_text = tk.Text(
+        ventana,
+        height=1,
+        width=18,
+        font=("Helvetica", 20),
+        bd=5,
+        state="disabled",
+        bg="black",
+        fg="green",
+    )
+    resultado_text.grid(row=8, column=0, columnspan=4, padx=10, pady=(10, 0))
 
 # Agregar la etiqueta "Total" antes de la caja de texto del resultado
-total_label = tk.Label(ventana, text="Total:", font=("Helvetica", 20), bg="black", fg="green")
-total_label.grid(row=8, column=0, columnspan=4, sticky="W", padx=10, pady=(10, 0))
+    total_label = tk.Label(
+        ventana,
+        text="Total:",
+        font=("Helvetica", 20),
+        bg="black",
+        fg="green",
+    )
+    total_label.grid(row=8, column=0, columnspan=4, sticky="W", padx=10, pady=(10, 0))
 
-# Iniciar la ventana
-gif_label.after(100, play_gif_loop, gif_path, gif_label)
-ventana.mainloop()
+    # Iniciar la ventana
+    gif_label.after(100, play_gif_loop, gif_path, gif_label)
+    ventana.mainloop()
+
+
+if __name__ == "__main__":
+    main()

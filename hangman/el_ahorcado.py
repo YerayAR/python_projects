@@ -128,7 +128,12 @@ def play_game():
             print('¡Oh no! Te has quedado sin intentos😭😭. La palabra era', word)
             game_over = True
 
-while True:
-    play_game()
-    if not play_again():
-        break
+def main():
+    while True:
+        play_game()
+        if not play_again():
+            break
+
+
+if __name__ == "__main__":
+    main()
