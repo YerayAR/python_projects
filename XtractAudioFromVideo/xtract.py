@@ -24,5 +24,10 @@ def extraer_audio(ruta_videos, ruta_musica):
             # Guardar el archivo de audio
             audio.write_audiofile(ruta_audio)
 
-# Usar la función
-extraer_audio('path1', 'path2')
+def main():
+    """Ejemplo de uso"""
+    extraer_audio('path1', 'path2')
+
+
+if __name__ == "__main__":
+    main()

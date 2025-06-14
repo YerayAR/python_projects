@@ -186,36 +186,58 @@ def delete_password():
         passwords_listbox.delete(selected_password)
 
 # Crear la ventana principal
-window = tk.Tk()
-window.title("Generador de Contraseñas")
-window.geometry("400x200")
-window.config(bg=window_bg_color)
+def main():
+    global window, passwords_listbox
 
-# Establecer estilos
-set_styles()
+    window = tk.Tk()
+    window.title("Generador de Contraseñas")
+    window.geometry("400x200")
+    window.config(bg=window_bg_color)
 
-# Cuadro de texto para mostrar la contraseña generada
-password_entry = ttk.Entry(window, style=APP_TE)
-password_entry.pack(pady=10)
+    # Establecer estilos
+    set_styles()
 
-# Cuadro de texto para ingresar el nombre de la contraseña
-name_entry = ttk.Entry(window, style=APP_TE)
-name_entry.pack(pady=10)
+    # Cuadro de texto para mostrar la contraseña generada
+    password_entry = ttk.Entry(window, style=APP_TE)
+    password_entry.pack(pady=10)
 
-# Botón para generar una contraseña
-generate_button = ttk.Button(window, text="Generar Contraseña", command=generate_password, style=APP_TB)
-generate_button.pack(pady=5)
+    # Cuadro de texto para ingresar el nombre de la contraseña
+    name_entry = ttk.Entry(window, style=APP_TE)
+    name_entry.pack(pady=10)
 
-# Botón para guardar la contraseña
-save_button = ttk.Button(window, text="Guardar Contraseña", command=save_password, style=APP_TB)
-save_button.pack(pady=5)
+    # Botón para generar una contraseña
+    generate_button = ttk.Button(
+        window,
+        text="Generar Contraseña",
+        command=generate_password,
+        style=APP_TB,
+    )
+    generate_button.pack(pady=5)
 
-# Botón para abrir la ventana de contraseñas guardadas
-open_passwords_button = ttk.Button(window, text="Contraseñas Guardadas", command=open_passwords_window, style=APP_TB)
-open_passwords_button.pack(pady=5)
+    # Botón para guardar la contraseña
+    save_button = ttk.Button(
+        window,
+        text="Guardar Contraseña",
+        command=save_password,
+        style=APP_TB,
+    )
+    save_button.pack(pady=5)
+
+    # Botón para abrir la ventana de contraseñas guardadas
+    open_passwords_button = ttk.Button(
+        window,
+        text="Contraseñas Guardadas",
+        command=open_passwords_window,
+        style=APP_TB,
+    )
+    open_passwords_button.pack(pady=5)
 
 # Crear la lista de contraseñas
-passwords_listbox = None
+    passwords_listbox = None
 
-# Ejecutar el bucle principal de la interfaz gráfica
-window.mainloop()
+    # Ejecutar el bucle principal de la interfaz gráfica
+    window.mainloop()
+
+
+if __name__ == "__main__":
+    main()

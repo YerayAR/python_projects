@@ -54,6 +54,11 @@ result_label.pack()
 result_text = scrolledtext.ScrolledText(window, width=50, height=10)
 result_text.pack()
 
-# Start the GUI
-window.mainloop()
+def main():
+    # Start the GUI
+    window.mainloop()
+
+
+if __name__ == "__main__":
+    main()
 
