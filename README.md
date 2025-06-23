@@ -1,52 +1,157 @@
-# Proyectos en Python
+# GeoPoint Tracker
 
-Este repositorio reúne varios proyectos cortos desarrollados en Python. Cada carpeta contiene su propio `README.md` con instrucciones específicas y detalles de implementación.
+## Project Overview
+GeoPoint Tracker is a sample geolocation platform designed to store and visualize geographic points of interest. The application exposes a RESTful backend built with **Java 11** and **Spring Boot**, a modern frontend rendered with **Thymeleaf** and **Leaflet** for interactive mapping, and persistent storage on **PostgreSQL**. Docker and Maven streamline building, running, and shipping the application.
 
-## Índice de proyectos
+## Features
+- User registration and login
+- Record geospatial locations with custom metadata
+- Interactive map visualization using Leaflet
+- REST API for CRUD operations on location data
+- Role-based access control
+- Dockerized deployment
 
-- [Calculadora Futurista](#calculadora-futurista)
-- [Juego del Ahorcado](#juego-del-ahorcado)
-- [Pong](#pong)
-- [Xtract Audio From Video](#xtract-audio-from-video)
-- [Visualizador de Algoritmos de Ordenamiento](#visualizador-de-algoritmos-de-ordenamiento)
-- [Generador y Guardador de Contraseñas](#generador-y-guardador-de-contraseñas)
-- [Conversor de Texto a Emoji](#conversor-de-texto-a-emoji)
+## Technology Stack
+| Technology   | Role / Purpose |
+|--------------|----------------|
+| **Java 11**  | Core language for the backend logic |
+| **Spring Boot** | Main framework providing REST capabilities, security, and integration with PostgreSQL |
+| **PostgreSQL** | Relational database storing user and location information |
+| **JSF / Thymeleaf** | Server-side rendering of pages and forms |
+| **Leaflet** | Library for map visualization on the frontend |
+| **Maven** | Dependency management and build tool |
+| **Docker / Docker Compose** | Containerization and orchestration |
 
-## Calculadora Futurista
+## Architecture & Folder Structure
+The project follows a layered architecture separating controllers, services, repositories, and views.
 
-Calculadora gráfica con Tkinter que utiliza un GIF de fondo y admite operaciones básicas.  
-Archivo principal: `calc/calculadora.py`.
+```mermaid
+flowchart LR
+    subgraph Backend
+        A[Controller] --> B[Service]
+        B --> C[Repository]
+        C --> D[(PostgreSQL)]
+    end
+    subgraph Frontend
+        E[Thymeleaf Views] --> F[Leaflet Map]
+    end
+    A <--> E
+```
 
-## Juego del Ahorcado
+Typical folder tree:
+```
+GeoPoint-Tracker/
+├── src/
+│   ├── main/
+│   │   ├── java/com/example/geopoint/
+│   │   │   ├── controller/
+│   │   │   ├── service/
+│   │   │   └── repository/
+│   │   └── resources/
+│   │       ├── static/
+│   │       └── templates/
+│   └── test/
+├── docker/
+├── Dockerfile
+├── docker-compose.yml
+└── pom.xml
+```
 
-Versión en consola del clásico juego.  
-Archivo principal: `hangman/el_ahorcado.py`.
+## Endpoints (API Reference)
+| HTTP Method | Route | Description |
+|-------------|-------|-------------|
+| `GET` | `/api/locations` | List all locations |
+| `GET` | `/api/locations/{id}` | Retrieve a single location |
+| `POST` | `/api/locations` | Create a new location |
+| `PUT` | `/api/locations/{id}` | Update an existing location |
+| `DELETE` | `/api/locations/{id}` | Remove a location |
 
-## Pong
+## Setup & Installation
+### Prerequisites
+- JDK 11+
+- Maven 3+
+- Docker & Docker Compose
 
-Implementación sencilla del juego Pong usando Tkinter.  
-Archivo principal: `pong/pong.py`.
+### Environment Variables
+Set these variables when running locally or in production:
+- `SPRING_DATASOURCE_URL` – JDBC URL to the PostgreSQL instance
+- `SPRING_DATASOURCE_USERNAME` – Database username
+- `SPRING_DATASOURCE_PASSWORD` – Database password
+- `SERVER_PORT` – Port for the web server (default `8080`)
 
-## Xtract Audio From Video
+### Local Setup
+```bash
+# Clone repository
+git clone https://github.com/youruser/geopoint-tracker.git
+cd geopoint-tracker
 
-Herramienta que extrae el audio de los videos de una carpeta utilizando MoviePy.  
-Archivo principal: `XtractAudioFromVideo/xtract.py`.
+# Build project
+mvn clean package
 
-## Visualizador de Algoritmos de Ordenamiento
+# Start PostgreSQL (if using Docker)
+docker-compose up -d db
 
-Muestra de forma gráfica cómo funcionan distintos algoritmos de ordenamiento (Selection Sort, Quick Sort y Merge Sort).  
-Archivo principal: `visual_sort/ordenacion_visual.py`.
+# Run application
+java -jar target/geopoint-tracker.jar
+```
 
-## Generador y Guardador de Contraseñas
+### Docker / Docker Compose
+```bash
+# Build images and start services
+docker-compose up --build
 
-Aplicación con interfaz gráfica para generar contraseñas seguras y guardarlas en un archivo CSV.  
-Archivo principal: `password_genNsave/passw_genNsave.py`.
+# Stop services
+docker-compose down
+```
 
-## Conversor de Texto a Emoji
+## Running the Project
+Common commands:
+```bash
+# Compile and package
+mvn package
 
-Convierte palabras en inglés a emojis mediante un diccionario en formato JSON.  
-Archivo principal: `text_to_emoji/text_to_emoji.py`.
+# Run tests
+mvn test
 
-## Instalación de dependencias
+# Execute the jar
+java -jar target/geopoint-tracker.jar
 
-Cada proyecto puede requerir bibliotecas distintas. Consulta el `README.md` de la carpeta correspondiente para conocer las dependencias y cómo instalarlas.
+# Build Docker image
+docker build -t geopoint-tracker .
+
+# Deploy with Docker Compose
+docker-compose up -d
+```
+
+## Screenshots or Diagrams
+Below is a sample sequence diagram showing interaction between frontend and backend.
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant B as Backend
+    participant DB as Database
+
+    U->>F: Request Map Page
+    F->>B: GET /api/locations
+    B->>DB: Query locations
+    DB-->>B: Return data
+    B-->>F: JSON with points
+    F-->>U: Render map with markers
+```
+
+## Contributing
+1. Fork the repository and create a feature branch:
+   ```bash
+   git checkout -b feature/my-feature
+   ```
+2. Commit your changes following conventional commit messages.
+3. Push the branch and open a Pull Request describing the changes.
+4. Ensure new code is covered by tests and CI passes.
+5. After review, your PR will be merged into `main`.
+
+## License & Credits
+This project is released under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+Credits to all open source libraries and contributors involved in making GeoPoint Tracker possible.
