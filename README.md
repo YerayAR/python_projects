@@ -1,157 +1,43 @@
-# GeoPoint Tracker
+# Python Projects Collection
 
-## Project Overview
-GeoPoint Tracker is a sample geolocation platform designed to store and visualize geographic points of interest. The application exposes a RESTful backend built with **Java 11** and **Spring Boot**, a modern frontend rendered with **Thymeleaf** and **Leaflet** for interactive mapping, and persistent storage on **PostgreSQL**. Docker and Maven streamline building, running, and shipping the application.
+This repository hosts a variety of small Python applications. Each project lives in its own folder and can be run independently.
 
-## Features
-- User registration and login
-- Record geospatial locations with custom metadata
-- Interactive map visualization using Leaflet
-- REST API for CRUD operations on location data
-- Role-based access control
-- Dockerized deployment
+## Projects Overview
 
-## Technology Stack
-| Technology   | Role / Purpose |
-|--------------|----------------|
-| **Java 11**  | Core language for the backend logic |
-| **Spring Boot** | Main framework providing REST capabilities, security, and integration with PostgreSQL |
-| **PostgreSQL** | Relational database storing user and location information |
-| **JSF / Thymeleaf** | Server-side rendering of pages and forms |
-| **Leaflet** | Library for map visualization on the frontend |
-| **Maven** | Dependency management and build tool |
-| **Docker / Docker Compose** | Containerization and orchestration |
+| Folder | Description | Main dependencies | How to Run |
+|-------|-------------|------------------|-----------|
+| [`calc/`](calc/) | Graphical calculator with an animated GIF background. | `tkinter`, `Pillow` | `python calculadora.py` |
+| [`hangman/`](hangman/) | Console version of the hangman word game in Spanish. | Standard library | `python el_ahorcado.py` |
+| [`pong/`](pong/) | Pong clone using Tkinter with basic AI opponent. | `tkinter` | `python pong.py` |
+| [`visual_sort/`](visual_sort/) | Sorting algorithm visualiser with audio feedback. | `tkinter`, `matplotlib`, `pygame` | `python ordenacion_visual.py` |
+| [`text_to_emoji/`](text_to_emoji/) | Converts English phrases to emojis from a JSON dictionary. | `tkinter` | `python text_to_emoji.py` |
+| [`password_genNsave/`](password_genNsave/) | GUI to generate passwords and store them in a CSV file. | `tkinter` | `python passw_genNsave.py` |
+| [`XtractAudioFromVideo/`](XtractAudioFromVideo/) | Batch extractor that saves audio tracks from videos. | `moviepy` | `python xtract.py` |
 
-## Architecture & Folder Structure
-The project follows a layered architecture separating controllers, services, repositories, and views.
+Refer to each subfolder's README for detailed instructions, screenshots and future enhancements.
 
-```mermaid
-flowchart LR
-    subgraph Backend
-        A[Controller] --> B[Service]
-        B --> C[Repository]
-        C --> D[(PostgreSQL)]
-    end
-    subgraph Frontend
-        E[Thymeleaf Views] --> F[Leaflet Map]
-    end
-    A <--> E
-```
+## Requirements
 
-Typical folder tree:
-```
-GeoPoint-Tracker/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/geopoint/
-│   │   │   ├── controller/
-│   │   │   ├── service/
-│   │   │   └── repository/
-│   │   └── resources/
-│   │       ├── static/
-│   │       └── templates/
-│   └── test/
-├── docker/
-├── Dockerfile
-├── docker-compose.yml
-└── pom.xml
-```
+- Python 3.7 or newer
+- Project specific dependencies as listed above
 
-## Endpoints (API Reference)
-| HTTP Method | Route | Description |
-|-------------|-------|-------------|
-| `GET` | `/api/locations` | List all locations |
-| `GET` | `/api/locations/{id}` | Retrieve a single location |
-| `POST` | `/api/locations` | Create a new location |
-| `PUT` | `/api/locations/{id}` | Update an existing location |
-| `DELETE` | `/api/locations/{id}` | Remove a location |
+A virtual environment is recommended to isolate dependencies:
 
-## Setup & Installation
-### Prerequisites
-- JDK 11+
-- Maven 3+
-- Docker & Docker Compose
-
-### Environment Variables
-Set these variables when running locally or in production:
-- `SPRING_DATASOURCE_URL` – JDBC URL to the PostgreSQL instance
-- `SPRING_DATASOURCE_USERNAME` – Database username
-- `SPRING_DATASOURCE_PASSWORD` – Database password
-- `SERVER_PORT` – Port for the web server (default `8080`)
-
-### Local Setup
 ```bash
-# Clone repository
-git clone https://github.com/youruser/geopoint-tracker.git
-cd geopoint-tracker
-
-# Build project
-mvn clean package
-
-# Start PostgreSQL (if using Docker)
-docker-compose up -d db
-
-# Run application
-java -jar target/geopoint-tracker.jar
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+pip install -r requirements.txt  # if provided
 ```
 
-### Docker / Docker Compose
+## Usage
+
+Navigate to the desired project directory and run the indicated script. Example for the calculator:
+
 ```bash
-# Build images and start services
-docker-compose up --build
-
-# Stop services
-docker-compose down
+cd calc
+python calculadora.py
 ```
 
-## Running the Project
-Common commands:
-```bash
-# Compile and package
-mvn package
+Some projects rely on additional media files such as GIFs or audio clips. Adjust the file paths in the code if necessary.
 
-# Run tests
-mvn test
-
-# Execute the jar
-java -jar target/geopoint-tracker.jar
-
-# Build Docker image
-docker build -t geopoint-tracker .
-
-# Deploy with Docker Compose
-docker-compose up -d
-```
-
-## Screenshots or Diagrams
-Below is a sample sequence diagram showing interaction between frontend and backend.
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant F as Frontend
-    participant B as Backend
-    participant DB as Database
-
-    U->>F: Request Map Page
-    F->>B: GET /api/locations
-    B->>DB: Query locations
-    DB-->>B: Return data
-    B-->>F: JSON with points
-    F-->>U: Render map with markers
-```
-
-## Contributing
-1. Fork the repository and create a feature branch:
-   ```bash
-   git checkout -b feature/my-feature
-   ```
-2. Commit your changes following conventional commit messages.
-3. Push the branch and open a Pull Request describing the changes.
-4. Ensure new code is covered by tests and CI passes.
-5. After review, your PR will be merged into `main`.
-
-## License & Credits
-This project is released under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-Credits to all open source libraries and contributors involved in making GeoPoint Tracker possible.
+Happy coding!
